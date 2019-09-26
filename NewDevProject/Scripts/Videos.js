@@ -1,36 +1,23 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * 
- * @format
- * @flow
- */
-
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
+import {Platform, StyleSheet, Text, View, Image, TouchableOpacity, Button} from 'react-native';
+import { createAppContainer} from 'react-navigation';
+import img from './BG/BG3.png'
 
+export default class Vídeos extends Component {
 
-export default class App extends Component {
+  static navigationOptions = {
+    title: 'Vídeos'
+    
+  };
 
   render() {
     return (
       <View style={styles.container}>
 
-        <View class="" style={styles.bgImage}>
-          <Image source={require('./src/BG3.png')}/>
+       <View class="" style={styles.bgImage}>
+          <Image source={img}/>
         </View>
-             
-      
-       <View style={styles.btnArea}>
-        
-         <TouchableOpacity style={[styles.botao , styles.botaoColor1]}>
-          <Text style={styles.btnTexto}>PROGRAMAÇÃO</Text>
-         </TouchableOpacity>
-        
-       </View>
-
-      
-
+        <Text style={styles.btnTexto}>Vídeos!</Text>
       </View>
     );
   }
