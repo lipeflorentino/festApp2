@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Image, TouchableOpacity, Button} from 'react-native';
+import {Platform, StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, Button} from 'react-native';
 import { createAppContainer} from 'react-navigation';
 import img from './BG/BG3.png'
+import img2 from './BG/ArtistaJazz.jpg'
 
 export default class Artistas extends Component {
 
@@ -14,10 +15,114 @@ export default class Artistas extends Component {
     return (
       <View style={styles.container}>
 
-       <View class="" style={styles.bgImage}>
+       {/* <View class="" style={styles.bgImage}>
           <Image source={img}/>
-        </View>
-        <Text style={styles.btnTexto}>Artistas!</Text>
+        </View> */}
+
+        <View>
+        <ScrollView>  
+        
+        <View style={styles.btnArea2}>
+         <TouchableOpacity style={[styles.botao , styles.botaoColor1]} onPress= {() =>
+                                       this.props.navigation.navigate('Agenda')}>
+          <View class="" style={styles.bgImage}>
+          <Image source={img2}/>
+          </View>
+
+          <View>
+          <Text style={styles.btnTexto}>Artista1 Banda de Jazz </Text>
+          </View>
+         </TouchableOpacity>
+
+         <TouchableOpacity style={[styles.botao , styles.botaoColor1]}  onPress= {() =>
+                                       this.props.navigation.navigate('Agenda')}>
+          <View class="" style={styles.bgImage}>
+          <Image source={img2}/>
+          </View>
+
+           <View>
+          <Text style={styles.btnTexto}>Artista2 Banda de Blues </Text>
+          </View>
+         </TouchableOpacity>
+         </View>
+
+         <View style={styles.btnArea2}>
+         <TouchableOpacity style={[styles.botao , styles.botaoColor1]} onPress= {() =>
+                                       this.props.navigation.navigate('Agenda')}>
+          <View class="" style={styles.bgImage}>
+          <Image source={img2}/>
+          </View>
+
+          <View>
+          <Text style={styles.btnTexto}>Artista1 Banda de Jazz </Text>
+          </View>
+         </TouchableOpacity>
+
+         <TouchableOpacity style={[styles.botao , styles.botaoColor1]}  onPress= {() =>
+                                       this.props.navigation.navigate('Agenda')}>
+          <View class="" style={styles.bgImage}>
+          <Image source={img2}/>
+          </View>
+
+           <View>
+          <Text style={styles.btnTexto}>Artista2 Banda de Blues </Text>
+          </View>
+         </TouchableOpacity>
+         </View>
+
+         <View style={styles.btnArea2}>
+         <TouchableOpacity style={[styles.botao , styles.botaoColor1]} onPress= {() =>
+                                       this.props.navigation.navigate('Agenda')}>
+          <View class="" style={styles.bgImage}>
+          <Image source={img2}/>
+          </View>
+
+          <View>
+          <Text style={styles.btnTexto}>Artista1 Banda de Jazz </Text>
+          </View>
+         </TouchableOpacity>
+
+         <TouchableOpacity style={[styles.botao , styles.botaoColor1]}  onPress= {() =>
+                                       this.props.navigation.navigate('Agenda')}>
+          <View class="" style={styles.bgImage}>
+          <Image source={img2}/>
+          </View>
+
+           <View>
+          <Text style={styles.btnTexto}>Artista2 Banda de Blues </Text>
+          </View>
+         </TouchableOpacity>
+         </View>
+
+         <View style={styles.btnArea2}>
+         <TouchableOpacity style={[styles.botao , styles.botaoColor1]} onPress= {() =>
+                                       this.props.navigation.navigate('Agenda')}>
+          <View class="" style={styles.bgImage}>
+          <Image source={img2}/>
+          </View>
+
+          <View>
+          <Text style={styles.btnTexto}>Artista1 Banda de Jazz </Text>
+          </View>
+         </TouchableOpacity>
+
+         <TouchableOpacity style={[styles.botao , styles.botaoColor1]}  onPress= {() =>
+                                       this.props.navigation.navigate('Agenda')}>
+          <View class="" style={styles.bgImage}>
+          <Image source={img2}/>
+          </View>
+
+           <View>
+          <Text style={styles.btnTexto}>Artista2 Banda de Blues </Text>
+          </View>
+         </TouchableOpacity>
+         </View>
+
+         
+        
+         </ScrollView>
+       </View>
+      
       </View>
     );
   }
@@ -25,38 +130,41 @@ export default class Artistas extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 2,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#68072F',
-  },
-  bgImage:{
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 0,
+    backgroundColor: 'black'
+  },
+  
+    bgImage:{
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
     position: 'absolute',
-    height: 100,
-    width: 100
- 
+    height: 150,
+    width: '50%'
+    
   },
 
   btnArea:{
     flexDirection: 'row',
-    marginTop: 50,
-    height: 0
+    //marginTop: 50,
+    //height: 0
 
   },
   btnArea2:{
     flexDirection: 'row',
-    marginTop: 150,
-    height: 0
+    //marginTop: 150,
+    //height: 0
+    height: 150,
+    width: 400,
+    margin: 5
 
   },
   btnArea3:{
-    flexDirection: 'row',
-    marginTop: 150,
-    height: 0
+    //flexDirection: 'row',
+    //marginTop: 150,
+    //height: 0
 
   },
 
@@ -64,12 +172,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    height: 100,
-    margin: 17,
-    borderRadius: 9
+    height: 150,
+    width: 420,
+    //margin: 0,
+    //borderRadius: 2,
+    //opacity: 0.5
   },
   botaoColor1:{
-    backgroundColor: '#8A007E',
+    backgroundColor: 'black',
   },
   botaoColor2:{
     backgroundColor: '#915D44',
@@ -87,9 +197,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#B5733C',
   },
   btnTexto:{
-    fontSize: 20,
+    fontSize: 15,
     fontWeight: 'bold',
-    color: '#ffffff'
+    color: '#FFFFFF',
+    justifyContent: 'center',
+    //position: 'absolute',
+    paddingTop: 100
   }
  
 });

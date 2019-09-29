@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Image, TouchableOpacity, Button} from 'react-native';
+import {Platform, StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, Button} from 'react-native';
 import { createAppContainer} from 'react-navigation';
 import img from './BG/BG3.png'
 
@@ -14,10 +14,42 @@ export default class Programacao extends Component {
     return (
       <View style={styles.container}>
 
-       <View class="" style={styles.bgImage}>
+        <View class="" style={styles.bgImage}>
           <Image source={img}/>
         </View>
-        <Text style={styles.btnTexto}>Programação!</Text>
+      
+     
+      <View style={styles.btnArea}>
+        <ScrollView>  
+         <TouchableOpacity style={[styles.botao , styles.botaoColor1]} onPress= {() =>
+                                       this.props.navigation.navigate('Agenda')}>
+          <Text style={styles.btnTexto}>PROGRAMAÇÃO 1 - Local 1</Text>
+         </TouchableOpacity>
+         <TouchableOpacity style={[styles.botao , styles.botaoColor1]}  onPress= {() =>
+                                       this.props.navigation.navigate('Agenda')}>
+          <Text style={styles.btnTexto}>PROGRAMAÇÃO 2 - Local 2</Text>
+         </TouchableOpacity>
+         <TouchableOpacity style={[styles.botao , styles.botaoColor1]} onPress= {() =>
+                                       this.props.navigation.navigate('Agenda')}>
+          <Text style={styles.btnTexto}>PROGRAMAÇÃO 3 - Local 3</Text>
+         </TouchableOpacity>
+         <TouchableOpacity style={[styles.botao , styles.botaoColor1]}  onPress= {() =>
+                                       this.props.navigation.navigate('Agenda')}>
+          <Text style={styles.btnTexto}>PROGRAMAÇÃO 4 - Local 4</Text>
+         </TouchableOpacity>
+         <TouchableOpacity style={[styles.botao , styles.botaoColor1]} onPress= {() =>
+                                       this.props.navigation.navigate('Agenda')}>
+          <Text style={styles.btnTexto}>PROGRAMAÇÃO 5 - Local 5</Text>
+         </TouchableOpacity>
+         <TouchableOpacity style={[styles.botao , styles.botaoColor1]}  onPress= {() =>
+                                       this.props.navigation.navigate('Agenda')}>
+          <Text style={styles.btnTexto}>PROGRAMAÇÃO 6 - Local 6</Text>
+         </TouchableOpacity>
+         </ScrollView>
+       </View>
+      
+      
+
       </View>
     );
   }
@@ -25,12 +57,12 @@ export default class Programacao extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 2,
+    flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#68072F',
+    alignItems: 'center'
   },
-  bgImage:{
+  
+    bgImage:{
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -38,25 +70,25 @@ const styles = StyleSheet.create({
     position: 'absolute',
     height: 100,
     width: 100
- 
+    
   },
 
   btnArea:{
-    flexDirection: 'row',
-    marginTop: 50,
-    height: 0
+    //flexDirection: 'row',
+    //marginTop: 50,
+    //height: 0
 
   },
   btnArea2:{
-    flexDirection: 'row',
-    marginTop: 150,
-    height: 0
+    //flexDirection: 'row',
+    //marginTop: 150,
+    //height: 0
 
   },
   btnArea3:{
-    flexDirection: 'row',
-    marginTop: 150,
-    height: 0
+    //flexDirection: 'row',
+    //marginTop: 150,
+    //height: 0
 
   },
 
@@ -64,12 +96,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    height: 100,
-    margin: 17,
-    borderRadius: 9
+    height: 150,
+    width: 400,
+    margin: 4,
+    borderRadius: 9,
+    opacity: 0.5
   },
   botaoColor1:{
-    backgroundColor: '#8A007E',
+    backgroundColor: 'white',
   },
   botaoColor2:{
     backgroundColor: '#915D44',
@@ -89,7 +123,8 @@ const styles = StyleSheet.create({
   btnTexto:{
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#ffffff'
+    color: '#000000',
+    justifyContent: 'flex-start',
   }
  
 });

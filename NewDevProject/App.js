@@ -9,6 +9,7 @@ import Artistas from './Scripts/Artistas'
 import OndeFicar from './Scripts/OndeFicar'
 import OndeComer from './Scripts/OndeComer'
 import Noticias from './Scripts/Noticias'
+import Agenda from './Scripts/Agenda'
 import Videos from './Scripts/Videos'
 
 const Navegador = createStackNavigator ({
@@ -29,6 +30,9 @@ const Navegador = createStackNavigator ({
   },
   Noticias: {
     screen: Noticias
+  },
+  Agenda: {
+    screen: Agenda
   },
   Videos: {
     screen: Videos
