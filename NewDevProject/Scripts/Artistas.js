@@ -24,7 +24,7 @@ export default class Artistas extends Component {
         
         <View style={styles.btnArea2}>
          <TouchableOpacity style={[styles.botao , styles.botaoColor1]} onPress= {() =>
-                                       this.props.navigation.navigate('Agenda')}>
+                                       this.props.navigation.navigate('Artista')}>
           <View class="" style={styles.bgImage}>
           <Image source={img2}/>
           </View>
@@ -35,7 +35,7 @@ export default class Artistas extends Component {
          </TouchableOpacity>
 
          <TouchableOpacity style={[styles.botao , styles.botaoColor1]}  onPress= {() =>
-                                       this.props.navigation.navigate('Agenda')}>
+                                       this.props.navigation.navigate('Artista')}>
           <View class="" style={styles.bgImage}>
           <Image source={img2}/>
           </View>
@@ -48,7 +48,7 @@ export default class Artistas extends Component {
 
          <View style={styles.btnArea2}>
          <TouchableOpacity style={[styles.botao , styles.botaoColor1]} onPress= {() =>
-                                       this.props.navigation.navigate('Agenda')}>
+                                       this.props.navigation.navigate('Artista')}>
           <View class="" style={styles.bgImage}>
           <Image source={img2}/>
           </View>
@@ -59,7 +59,7 @@ export default class Artistas extends Component {
          </TouchableOpacity>
 
          <TouchableOpacity style={[styles.botao , styles.botaoColor1]}  onPress= {() =>
-                                       this.props.navigation.navigate('Agenda')}>
+                                       this.props.navigation.navigate('Artista')}>
           <View class="" style={styles.bgImage}>
           <Image source={img2}/>
           </View>
@@ -72,7 +72,7 @@ export default class Artistas extends Component {
 
          <View style={styles.btnArea2}>
          <TouchableOpacity style={[styles.botao , styles.botaoColor1]} onPress= {() =>
-                                       this.props.navigation.navigate('Agenda')}>
+                                       this.props.navigation.navigate('Artista')}>
           <View class="" style={styles.bgImage}>
           <Image source={img2}/>
           </View>
@@ -83,7 +83,7 @@ export default class Artistas extends Component {
          </TouchableOpacity>
 
          <TouchableOpacity style={[styles.botao , styles.botaoColor1]}  onPress= {() =>
-                                       this.props.navigation.navigate('Agenda')}>
+                                       this.props.navigation.navigate('Artista')}>
           <View class="" style={styles.bgImage}>
           <Image source={img2}/>
           </View>
@@ -96,7 +96,7 @@ export default class Artistas extends Component {
 
          <View style={styles.btnArea2}>
          <TouchableOpacity style={[styles.botao , styles.botaoColor1]} onPress= {() =>
-                                       this.props.navigation.navigate('Agenda')}>
+                                       this.props.navigation.navigate('Artista')}>
           <View class="" style={styles.bgImage}>
           <Image source={img2}/>
           </View>
@@ -107,7 +107,7 @@ export default class Artistas extends Component {
          </TouchableOpacity>
 
          <TouchableOpacity style={[styles.botao , styles.botaoColor1]}  onPress= {() =>
-                                       this.props.navigation.navigate('Agenda')}>
+                                       this.props.navigation.navigate('Artista')}>
           <View class="" style={styles.bgImage}>
           <Image source={img2}/>
           </View>
