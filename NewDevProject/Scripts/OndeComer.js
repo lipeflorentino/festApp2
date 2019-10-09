@@ -1,23 +1,72 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Image, TouchableOpacity, Button} from 'react-native';
+import {Platform, StyleSheet, Text, ScrollView, View, Image, TouchableOpacity, Button} from 'react-native';
 import { createAppContainer} from 'react-navigation';
 import img from './BG/BG3.png'
+import img2 from './BG/Hotel1.jpg'
 
 export default class OndeComer extends Component {
 
   static navigationOptions = {
     title: 'Onde Comer'
-    
   };
 
   render() {
     return (
       <View style={styles.container}>
 
-       <View class="" style={styles.bgImage}>
-          <Image source={img}/>
+        <View class="" style={styles.bgImage}>
+        <Image source={img}/>
         </View>
-        <Text style={styles.btnTexto}>Onde Comer!</Text>
+
+          <ScrollView>
+            <View style={styles.btnArea}>
+              <TouchableOpacity onPress= {() =>
+                                        this.props.navigation.navigate('LocalComer')}>  
+                <View class="" style={styles.infoImage}>
+                <Image source={img2}/>
+                </View>
+                <View>
+                <Text style={styles.txtTitulo}>Local 1</Text>
+                </View>
+                <View>
+                <Text style={styles.txtInfo}>Lorem ipsum dolor sit amet, consectetur.</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.btnArea}>
+              <TouchableOpacity onPress= {() =>
+                                        this.props.navigation.navigate('LocalComer')}>  
+                <View class="" style={styles.infoImage}>
+                <Image source={img2}/>
+                </View>
+                <View>
+                <Text style={styles.txtTitulo}>Local 2</Text>
+                </View>
+                <View>
+                <Text style={styles.txtInfo}>Lorem ipsum dolor sit amet, consectetur.</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.btnArea}>
+              <TouchableOpacity onPress= {() =>
+                                        this.props.navigation.navigate('LocalComer')}>  
+                <View class="" style={styles.infoImage}>
+                <Image source={img2}/>
+                </View>
+                <View>
+                <Text style={styles.txtTitulo}>Local 3</Text>
+                </View>
+                <View>
+                <Text style={styles.txtInfo}>Lorem ipsum dolor sit amet, consectetur.</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          
+          </ScrollView>
+          
+          
       </View>
     );
   }
@@ -25,10 +74,10 @@ export default class OndeComer extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 2,
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#68072F',
+    backgroundColor: 'white',
   },
   bgImage:{
     flex: 1,
@@ -38,28 +87,30 @@ const styles = StyleSheet.create({
     position: 'absolute',
     height: 100,
     width: 100
+  },
+  infoImage:{
+    //flex: 1,
+    //justifyContent: 'center',
+    //alignItems: 'center',
+    //marginTop: 10,
+    //marginBottom: 10,
+    //height: 100,
+    //width: 100
  
+  },
+  txtTitulo:{
+    color: "black",
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginLeft: 10,
+    marginRight: 10  
   },
 
   btnArea:{
-    flexDirection: 'row',
-    marginTop: 50,
-    height: 0
-
+    backgroundColor: 'white',
+    marginRight: 10,
+    marginBottom : 10
   },
-  btnArea2:{
-    flexDirection: 'row',
-    marginTop: 150,
-    height: 0
-
-  },
-  btnArea3:{
-    flexDirection: 'row',
-    marginTop: 150,
-    height: 0
-
-  },
-
   botao:{
     flex: 1,
     justifyContent: 'center',
@@ -68,28 +119,15 @@ const styles = StyleSheet.create({
     margin: 17,
     borderRadius: 9
   },
-  botaoColor1:{
-    backgroundColor: '#8A007E',
-  },
-  botaoColor2:{
-    backgroundColor: '#915D44',
-  },
-  botaoColor3:{
-    backgroundColor: '#BA007C',
-  },
-  botaoColor4:{
-    backgroundColor: '#A49171',
-  },
-  botaoColor5:{
-    backgroundColor: '#D68500',
-  },
-  botaoColor6:{
-    backgroundColor: '#B5733C',
-  },
-  btnTexto:{
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#ffffff'
+  txtInfo:{
+    fontSize: 16,
+    color: 'black',
+    //justifyContent: 'center',
+    textAlign: 'justify',
+    //paddingLeft: 10,
+    //paddingRight: 10,   
+    marginLeft: 10,
+    marginRight: 10  
   }
  
 });

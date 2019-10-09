@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, ScrollView, Image, TouchableOpacity, Button} from 'react-native';
 import { createAppContainer} from 'react-navigation';
-import img2 from './BG/Agenda1.jpg'
+import img2 from './BG/Hotel1.jpg'
 import img3 from './BG/Maps1.jpg'
 
-export default class Agenda extends Component {
+export default class LocalComer extends Component {
 
   static navigationOptions = {
-    title: 'Agenda',
+    title: 'Onde Comer',
     opacity: 0.5
   };
 
@@ -17,7 +17,7 @@ export default class Agenda extends Component {
 
       <ScrollView>    
         <View>
-        <Text style={styles.txtTitulo}>PROGRAMAÇÃO 1 - LOCAL 1 </Text>
+        <Text style={styles.txtTitulo}>LOCAL 1 </Text>
         <Text style={styles.bordered}></Text>
         </View>  
         
@@ -26,13 +26,18 @@ export default class Agenda extends Component {
           </View>
 
           <View style={styles.blocoTxt}>
-          <Text style={styles.txtId}>Data: </Text>
-          <Text style={styles.txtInfo}>00/00/0000</Text>
+          <Text style={styles.txtId}>Email: </Text>
+          <Text style={styles.txtInfo}>xxx@email.com</Text>
           </View>
 
           <View style={styles.blocoTxt}>
-          <Text style={styles.txtId}>Horário: </Text>
-          <Text style={styles.txtInfo}>00:00</Text>
+          <Text style={styles.txtId}>Telefone 1: </Text>
+          <Text style={styles.txtInfo}>(xx) xxxx-xxxx</Text>
+          </View>
+
+          <View style={styles.blocoTxt}>
+          <Text style={styles.txtId}>Telefone 2: </Text>
+          <Text style={styles.txtInfo}>(xx) xxxx-xxxx</Text>
           </View>
 
           <View style={styles.blocoTxt}>

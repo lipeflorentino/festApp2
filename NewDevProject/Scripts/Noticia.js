@@ -1,20 +1,26 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Image, TouchableOpacity, Button} from 'react-native';
 import { createAppContainer} from 'react-navigation';
-import img2 from './BG/Video1.png'
+import img2 from './BG/ArtistaJazz3.png'
 
-export default class Videos extends Component {
+export default class Noticia extends Component {
 
   static navigationOptions = {
-    title: 'Vídeos'
+    title: 'Notícia'
   };
 
   render() {
     return (
       <View style={styles.container}>
 
+          <View>
+          <Text style={styles.txtTitulo}>Notícia sobre o evento</Text>
+          </View>
           <View class="" style={styles.bgImage}>
           <Image source={img2}/>
+          </View>
+          <View>
+          <Text style={styles.btnTexto}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
           </View>
           
       </View>

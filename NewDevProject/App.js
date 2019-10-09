@@ -11,6 +11,9 @@ import OndeComer from './Scripts/OndeComer'
 import Noticias from './Scripts/Noticias'
 import Artista from './Scripts/Artista'
 import Agenda from './Scripts/Agenda'
+import Noticia from './Scripts/Noticia'
+import Local from './Scripts/Local'
+import LocalComer from './Scripts/LocalComer'
 import Videos from './Scripts/Videos'
 
 const Navegador = createStackNavigator ({
@@ -29,6 +32,12 @@ const Navegador = createStackNavigator ({
   OndeFicar: {
     screen: OndeFicar
   },
+  Local: {
+    screen: Local
+  },
+  LocalComer: {
+    screen: LocalComer
+  },
   OndeComer: {
     screen: OndeComer
   },
@@ -37,6 +46,9 @@ const Navegador = createStackNavigator ({
   },
   Artista: {
     screen: Artista
+  },
+  Noticia: {
+    screen: Noticia
   },
   Videos: {
     screen: Videos

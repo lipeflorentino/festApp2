@@ -1,23 +1,62 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Image, TouchableOpacity, Button} from 'react-native';
+import {Platform, StyleSheet, Text, ScrollView, View, Image, TouchableOpacity, Button} from 'react-native';
 import { createAppContainer} from 'react-navigation';
-import img from './BG/BG3.png'
+import img2 from './BG/ArtistaJazz3.png'
 
 export default class Noticias extends Component {
 
   static navigationOptions = {
     title: 'Notícias'
-    
   };
 
   render() {
     return (
       <View style={styles.container}>
 
-       <View class="" style={styles.bgImage}>
-          <Image source={img}/>
-        </View>
-        <Text style={styles.btnTexto}>Notícias!</Text>
+          <ScrollView>
+
+            <TouchableOpacity  onPress= {() =>
+                                       this.props.navigation.navigate('Noticia')}>  
+              <View class="" style={styles.bgImage}>
+              <Image source={img2}/>
+              </View>
+              <View>
+              <Text style={styles.txtTitulo}>Notícia sobre o evento 1</Text>
+              </View>
+              <View>
+              <Text style={styles.txtInfo}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress= {() =>
+                                       this.props.navigation.navigate('Noticia')}>  
+              <View class="" style={styles.bgImage}>
+              <Image source={img2}/>
+              </View>
+              <View>
+              <Text style={styles.txtTitulo}>Notícia sobre o evento 2</Text>
+              </View>
+              <View>
+              <Text style={styles.txtInfo}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress= {() =>
+                                       this.props.navigation.navigate('Noticia')}>  
+              <View class="" style={styles.bgImage}>
+              <Image source={img2}/>
+              </View>
+              <View>
+              <Text style={styles.txtTitulo}>Notícia sobre o evento 3</Text>
+              </View>
+              <View>
+              <Text style={styles.txtInfo}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
+              </View>
+            </TouchableOpacity>
+          
+          </ScrollView>
+          
+          
       </View>
     );
   }
@@ -25,20 +64,27 @@ export default class Noticias extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 2,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#68072F',
+    flex: 1,
+    //justifyContent: 'center',
+    //alignItems: 'center',
+    backgroundColor: 'white',
   },
   bgImage:{
-    flex: 1,
+    //flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 0,
-    position: 'absolute',
-    height: 100,
-    width: 100
+    marginTop: 10,
+    marginBottom: 10,
+    //height: 100,
+    //width: 100
  
+  },
+  txtTitulo:{
+    color: "black",
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginLeft: 10,
+    marginRight: 10  
   },
 
   btnArea:{
@@ -47,19 +93,6 @@ const styles = StyleSheet.create({
     height: 0
 
   },
-  btnArea2:{
-    flexDirection: 'row',
-    marginTop: 150,
-    height: 0
-
-  },
-  btnArea3:{
-    flexDirection: 'row',
-    marginTop: 150,
-    height: 0
-
-  },
-
   botao:{
     flex: 1,
     justifyContent: 'center',
@@ -68,28 +101,15 @@ const styles = StyleSheet.create({
     margin: 17,
     borderRadius: 9
   },
-  botaoColor1:{
-    backgroundColor: '#8A007E',
-  },
-  botaoColor2:{
-    backgroundColor: '#915D44',
-  },
-  botaoColor3:{
-    backgroundColor: '#BA007C',
-  },
-  botaoColor4:{
-    backgroundColor: '#A49171',
-  },
-  botaoColor5:{
-    backgroundColor: '#D68500',
-  },
-  botaoColor6:{
-    backgroundColor: '#B5733C',
-  },
-  btnTexto:{
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#ffffff'
+  txtInfo:{
+    fontSize: 16,
+    color: 'black',
+    //justifyContent: 'center',
+    textAlign: 'justify',
+    //paddingLeft: 10,
+    //paddingRight: 10,   
+    marginLeft: 10,
+    marginRight: 10  
   }
  
 });
