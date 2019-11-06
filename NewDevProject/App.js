@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Image, TouchableOpacity, Button} from 'react-native';
 import { createAppContainer} from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
+import firebase from 'firebase'
 
 import Home from './Scripts/Home';
 import Programacao from './Scripts/Programacao'
@@ -15,6 +16,7 @@ import Noticia from './Scripts/Noticia'
 import Local from './Scripts/Local'
 import LocalComer from './Scripts/LocalComer'
 import Videos from './Scripts/Videos'
+
 
 const Navegador = createStackNavigator ({
   Home: {
@@ -53,9 +55,7 @@ const Navegador = createStackNavigator ({
   Videos: {
     screen: Videos
   }
-});
+}); 
 
-const AppContainer = createAppContainer(Navegador); 
-
+const AppContainer = createAppContainer(Navegador);
 export default AppContainer;
-
