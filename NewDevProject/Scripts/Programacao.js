@@ -2,13 +2,50 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, Button} from 'react-native';
 import { createAppContainer} from 'react-navigation';
 import img from './BG/BG3.png'
+import firebase from 'firebase'
 
 export default class Programacao extends Component {
 
+  constructor(props){
+    super(props)
+
+    this.state = {
+      programacao: []
+    }
+
+    this.handleSubmit = this.handleSubmit.bind(this)
+
+    let firebaseConfig = {
+      apiKey: "AIzaSyDq95dRzVvYD6IUHNC_pb6dnFG7FfqGumI",
+      authDomain: "fmlanapp.firebaseapp.com",
+      databaseURL: "https://fmlanapp.firebaseio.com",
+      projectId: "fmlanapp",
+      storageBucket: "fmlanapp.appspot.com",
+      messagingSenderId: "1045348850059",
+      appId: "1:1045348850059:web:eba6952933fbc1cfb8378e",
+      measurementId: "G-S7RRR1CLFR"
+    };
+
+    // Initialize Firebase
+    if (!firebase.apps.length) {      
+      firebase.initializeApp(firebaseConfig);
+    }           
+
+    firebase.database().ref("programacao").on("value", (snapshot) => {
+      console.log('buscando...');
+      let state = this.state;            
+      state.programacao = snapshot.val();      
+      this.setState(state);
+    })
+  }
   static navigationOptions = {
     title: 'Programação'
     
   };
+
+  handleSubmit(id) {
+    this.props.navigation.navigate('Agenda', {progId: id})
+  }
 
   render() {
     return (
@@ -20,31 +57,17 @@ export default class Programacao extends Component {
       
      
       <View style={styles.btnArea}>
-        <ScrollView>  
-         <TouchableOpacity style={[styles.botao , styles.botaoColor1]} onPress= {() =>
-                                       this.props.navigation.navigate('Agenda')}>
-          <Text style={styles.btnTexto}>PROGRAMAÇÃO 1 - Local 1</Text>
-         </TouchableOpacity>
-         <TouchableOpacity style={[styles.botao , styles.botaoColor1]}  onPress= {() =>
-                                       this.props.navigation.navigate('Agenda')}>
-          <Text style={styles.btnTexto}>PROGRAMAÇÃO 2 - Local 2</Text>
-         </TouchableOpacity>
-         <TouchableOpacity style={[styles.botao , styles.botaoColor1]} onPress= {() =>
-                                       this.props.navigation.navigate('Agenda')}>
-          <Text style={styles.btnTexto}>PROGRAMAÇÃO 3 - Local 3</Text>
-         </TouchableOpacity>
-         <TouchableOpacity style={[styles.botao , styles.botaoColor1]}  onPress= {() =>
-                                       this.props.navigation.navigate('Agenda')}>
-          <Text style={styles.btnTexto}>PROGRAMAÇÃO 4 - Local 4</Text>
-         </TouchableOpacity>
-         <TouchableOpacity style={[styles.botao , styles.botaoColor1]} onPress= {() =>
-                                       this.props.navigation.navigate('Agenda')}>
-          <Text style={styles.btnTexto}>PROGRAMAÇÃO 5 - Local 5</Text>
-         </TouchableOpacity>
-         <TouchableOpacity style={[styles.botao , styles.botaoColor1]}  onPress= {() =>
-                                       this.props.navigation.navigate('Agenda')}>
-          <Text style={styles.btnTexto}>PROGRAMAÇÃO 6 - Local 6</Text>
-         </TouchableOpacity>
+        <ScrollView>            
+          {
+            this.state.programacao.map((programacao, key) => {
+              return(
+                <TouchableOpacity key={programacao.id} style={[styles.botao , styles.botaoColor1]} onPress= {this.handleSubmit.bind(this, programacao.id)}>
+            <Text style={styles.btnTexto}>{programacao.titulo} - {programacao.data}</Text>
+                </TouchableOpacity>      
+              );
+            })     
+          }
+        
          </ScrollView>
        </View>
       

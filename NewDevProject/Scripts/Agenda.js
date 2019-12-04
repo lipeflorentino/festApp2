@@ -3,21 +3,55 @@ import {Platform, StyleSheet, Text, View, ScrollView, Image, TouchableOpacity, B
 import { createAppContainer} from 'react-navigation';
 import img2 from './BG/Agenda1.jpg'
 import img3 from './BG/Maps1.jpg'
+import firebase from 'firebase'
 
 export default class Agenda extends Component {
 
+  constructor(props){
+    super(props)        
+    this.state = {
+      agenda: [], 
+      progId: this.props.navigation.getParam('progId', null)        
+    }
+
+    //this.handleSubmit = this.handleSubmit.bind(this)
+
+    let firebaseConfig = {
+      apiKey: "AIzaSyDq95dRzVvYD6IUHNC_pb6dnFG7FfqGumI",
+      authDomain: "fmlanapp.firebaseapp.com",
+      databaseURL: "https://fmlanapp.firebaseio.com",
+      projectId: "fmlanapp",
+      storageBucket: "fmlanapp.appspot.com",
+      messagingSenderId: "1045348850059",
+      appId: "1:1045348850059:web:eba6952933fbc1cfb8378e",
+      measurementId: "G-S7RRR1CLFR"
+    };
+
+    // Initialize Firebase
+    if (!firebase.apps.length) {      
+      firebase.initializeApp(firebaseConfig);
+    }           
+
+    firebase.database().ref("programacao/"+this.state.progId).on("value", (snapshot) => {
+      console.log('buscando...');
+      let state = this.state;            
+      state.agenda = snapshot.val();      
+      this.setState(state);
+    })
+  }
   static navigationOptions = {
     title: 'Agenda',
     opacity: 0.5
   };
 
-  render() {
+  render() {    
+    const agenda = this.state.agenda
     return (
       <View style={styles.container}>
 
       <ScrollView>    
         <View>
-        <Text style={styles.txtTitulo}>PROGRAMAÇÃO 1 - LOCAL 1 </Text>
+    <Text style={styles.txtTitulo}>{agenda.titulo}</Text>
         <Text style={styles.bordered}></Text>
         </View>  
         
@@ -27,24 +61,24 @@ export default class Agenda extends Component {
 
           <View style={styles.blocoTxt}>
           <Text style={styles.txtId}>Data: </Text>
-          <Text style={styles.txtInfo}>00/00/0000</Text>
+          <Text style={styles.txtInfo}>{agenda.data}</Text>
           </View>
 
           <View style={styles.blocoTxt}>
           <Text style={styles.txtId}>Horário: </Text>
-          <Text style={styles.txtInfo}>00:00</Text>
+          <Text style={styles.txtInfo}>{agenda.horario}</Text>
           </View>
 
           <View style={styles.blocoTxt}>
           <Text style={styles.txtId}>Endereço: </Text>
-          <Text style={styles.txtInfo}>Endereço do Local 1</Text>
+          <Text style={styles.txtInfo}>{agenda.endereco}</Text>
           </View>
 
           <Text style={styles.bordered}></Text>
 
           <View>
           <Text style={styles.txtTitulo}>Como chegar: </Text>
-          <Text style={styles.txtInfo}></Text>
+          <Text style={styles.txtInfo}>{agenda.instrucoes}</Text>
           </View>
 
           <View class="" style={styles.titleImage}>
