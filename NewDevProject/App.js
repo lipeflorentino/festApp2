@@ -7,6 +7,7 @@ import firebase from 'firebase'
 import Home from './Scripts/Home';
 import Programacao from './Scripts/Programacao'
 import Artistas from './Scripts/Artistas'
+import AdminArtista from './Scripts/Admin/AdminArtista'
 import OndeFicar from './Scripts/OndeFicar'
 import OndeComer from './Scripts/OndeComer'
 import Noticias from './Scripts/Noticias'
@@ -47,7 +48,7 @@ const Navegador = createStackNavigator ({
     screen: Noticias
   },
   Artista: {
-    screen: Artista
+    screen: AdminArtista
   },
   Noticia: {
     screen: Noticia

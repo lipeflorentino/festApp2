@@ -60,7 +60,7 @@ export default class Artistas extends Component {
                 
                 
                 this.state.artista.map((artista, key) => {
-                  image = artista.url                                   
+                                                   
                   return (                  
                   <TouchableOpacity key={artista.id} style={[styles.botao , styles.botaoColor1]} onPress= {() => this.props.navigation.navigate('Artista')}>
                     <View class="" style={styles.bgImage}>

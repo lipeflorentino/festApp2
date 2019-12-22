@@ -51,12 +51,15 @@ export default class Agenda extends Component {
 
       <ScrollView>    
         <View>
-    <Text style={styles.txtTitulo}>{agenda.titulo}</Text>
+      <Text style={styles.txtTitulo}>{agenda.titulo}</Text>
         <Text style={styles.bordered}></Text>
         </View>  
         
           <View class="" style={styles.titleImage}>
-          <Image source={img2}/>
+          <Image 
+            source={{uri: agenda.progImg}}  
+            style={{width: '100%', height: "100%"}}           
+          />
           </View>
 
           <View style={styles.blocoTxt}>
@@ -76,13 +79,16 @@ export default class Agenda extends Component {
 
           <Text style={styles.bordered}></Text>
 
-          <View>
+          <View style={styles.blocoSecTxt}>
           <Text style={styles.txtTitulo}>Como chegar: </Text>
-          <Text style={styles.txtInfo}>{agenda.instrucoes}</Text>
+          <Text style={styles.txtSecInfo}>{agenda.instrucoes}</Text>
           </View>
 
           <View class="" style={styles.titleImage}>
-          <Image source={img3}/>
+          <Image 
+            source={{uri: agenda.url}} 
+            style={{width: '100%', height: "100%"}}            
+          />
           </View>
 
       </ScrollView>    
@@ -118,7 +124,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 10,
-    marginBottom: 10 
+    marginBottom: 10,
+    width: 400,
+    height: 200
   },
   txtTitulo:{
     color: "black",
@@ -130,10 +138,21 @@ const styles = StyleSheet.create({
   blocoTxt: {
     flexDirection: 'row'  
   },
+  blocoSecTxt: {
+    flex: 1,
+    justifyContent: 'center'    
+  },
   txtInfo:{
     color: "black",
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  txtSecInfo:{
+    color: "black",
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginLeft: 20,
+    marginRight: 20
   },
   txtId: {
     fontSize: 16,
