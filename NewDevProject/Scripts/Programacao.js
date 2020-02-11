@@ -34,7 +34,19 @@ export default class Programacao extends Component {
     firebase.database().ref("programacao").on("value", (snapshot) => {
       console.log('buscando...');
       let state = this.state;            
-      state.programacao = snapshot.val();      
+      state.programacao = []      
+      snapshot.forEach((item) => {
+        state.programacao.push({
+          key: item.key,
+          titulo: item.val().titulo,
+          instrucoes: item.val().instrucoes,
+          url: item.val().url, 
+          data: item.val().data,
+          progImg: item.val().progImg,  
+          horario: item.val().horario,  
+          endereco: item.val().endereco,  
+        })
+      })
       this.setState(state);
     })
   }
@@ -48,6 +60,7 @@ export default class Programacao extends Component {
   }
 
   render() {
+    let programacao = this.state.programacao
     return (
       <View style={styles.container}>
 
@@ -61,8 +74,8 @@ export default class Programacao extends Component {
           {
             this.state.programacao.map((programacao, key) => {
               return(
-                <TouchableOpacity key={programacao.id} style={[styles.botao , styles.botaoColor1]} onPress= {this.handleSubmit.bind(this, programacao.id)}>
-            <Text style={styles.btnTexto}>{programacao.titulo} - {programacao.data}</Text>
+                <TouchableOpacity key={key} style={[styles.botao , styles.botaoColor1]} onPress= {this.handleSubmit.bind(this, programacao.key)}>
+                  <Text style={styles.btnTexto}>{programacao.titulo} - {programacao.data}</Text>
                 </TouchableOpacity>      
               );
             })     

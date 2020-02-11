@@ -2,63 +2,102 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, ScrollView, View, Image, TouchableOpacity, Button} from 'react-native';
 import { createAppContainer} from 'react-navigation';
 import img2 from './BG/ArtistaJazz3.png'
+import firebase from 'firebase'
 
 export default class Noticias extends Component {
 
+  constructor(props){
+    super(props)
+
+    this.state = {
+      noticia: []
+    }
+
+    this.handleSubmit = this.handleSubmit.bind(this)
+
+    let firebaseConfig = {
+      apiKey: "AIzaSyDq95dRzVvYD6IUHNC_pb6dnFG7FfqGumI",
+      authDomain: "fmlanapp.firebaseapp.com",
+      databaseURL: "https://fmlanapp.firebaseio.com",
+      projectId: "fmlanapp",
+      storageBucket: "fmlanapp.appspot.com",
+      messagingSenderId: "1045348850059",
+      appId: "1:1045348850059:web:eba6952933fbc1cfb8378e",
+      measurementId: "G-S7RRR1CLFR"
+    };
+
+    // Initialize Firebase
+    if (!firebase.apps.length) {      
+      firebase.initializeApp(firebaseConfig);
+    }    
+    //let id = 1    
+
+    firebase.database().ref("noticias").on("value", (snapshot) => {
+      console.log('buscando...');
+      let state = this.state;  
+      state.noticia = [];          
+      snapshot.forEach((item) => {
+        state.noticia.push({
+          key: item.key,
+          titulo: item.val().titulo,
+          descricao: item.val().descricao,
+          url: item.val().url, 
+          data: item.val().data 
+        })
+      })
+      this.setState(state);
+    })
+  }
   static navigationOptions = {
     title: 'Notícias'
   };
 
+  handleSubmit(id) {
+    this.props.navigation.navigate('Noticia', {noticiaId: id})
+  }
+
   render() {
-    return (
-      <View style={styles.container}>
-
-          <ScrollView>
-
-            <TouchableOpacity  onPress= {() =>
-                                       this.props.navigation.navigate('Noticia')}>  
-              <View class="" style={styles.bgImage}>
-              <Image source={img2}/>
-              </View>
-              <View>
-              <Text style={styles.txtTitulo}>Notícia sobre o evento 1</Text>
-              </View>
-              <View>
-              <Text style={styles.txtInfo}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress= {() =>
-                                       this.props.navigation.navigate('Noticia')}>  
-              <View class="" style={styles.bgImage}>
-              <Image source={img2}/>
-              </View>
-              <View>
-              <Text style={styles.txtTitulo}>Notícia sobre o evento 2</Text>
-              </View>
-              <View>
-              <Text style={styles.txtInfo}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress= {() =>
-                                       this.props.navigation.navigate('Noticia')}>  
-              <View class="" style={styles.bgImage}>
-              <Image source={img2}/>
-              </View>
-              <View>
-              <Text style={styles.txtTitulo}>Notícia sobre o evento 3</Text>
-              </View>
-              <View>
-              <Text style={styles.txtInfo}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
-              </View>
-            </TouchableOpacity>
-          
-          </ScrollView>
-          
-          
+    if(this.state.noticia != '' && this.state.noticia){
+      console.log('entrou!')      
+      return (
+        <View style={styles.container}>
+          <View>
+            <ScrollView>
+            {                  
+              this.state.noticia.map((noticia, key) => {
+                                              
+              return (                
+                
+                    <TouchableOpacity key={key} onPress= {this.handleSubmit.bind(this, noticia.key)}>  
+                      <View class="" style={styles.bgImage}>
+                        <Image 
+                          source={{uri: noticia.url}}        
+                          style={{width: "100%", height: 200}}                   
+                        />
+                      </View>
+                      <View>
+                        <Text style={styles.txtTitulo}>{noticia.titulo}</Text>
+                      </View>
+                      <View>
+                        <Text style={styles.txtInfo}>{noticia.descricao}</Text>
+                      </View>
+                      <Text style={styles.btnTexto}>{noticia.data}</Text>
+                    </TouchableOpacity>                                  
+                                                         
+              );
+            })
+          }
+         </ScrollView>     
+        </View>   
       </View>
-    );
+      );
+    }else{
+      return(
+        <View>
+          <Text style={styles.txtInfo}>Ainda não há noticias cadastradas.</Text>
+        </View>
+      );
+    }
   }
 }
 

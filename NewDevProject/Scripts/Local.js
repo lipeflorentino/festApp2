@@ -3,8 +3,42 @@ import {Platform, StyleSheet, Text, View, ScrollView, Image, TouchableOpacity, B
 import { createAppContainer} from 'react-navigation';
 import img2 from './BG/Hotel1.jpg'
 import img3 from './BG/Maps1.jpg'
+import firebase from 'firebase'
 
 export default class Local extends Component {
+
+  constructor(props){
+    super(props)        
+    this.state = {
+      hospedagem: [], 
+      hospedagemId: this.props.navigation.getParam('hospedagemId', null)        
+    }
+
+    //this.handleSubmit = this.handleSubmit.bind(this)
+
+    let firebaseConfig = {
+      apiKey: "AIzaSyDq95dRzVvYD6IUHNC_pb6dnFG7FfqGumI",
+      authDomain: "fmlanapp.firebaseapp.com",
+      databaseURL: "https://fmlanapp.firebaseio.com",
+      projectId: "fmlanapp",
+      storageBucket: "fmlanapp.appspot.com",
+      messagingSenderId: "1045348850059",
+      appId: "1:1045348850059:web:eba6952933fbc1cfb8378e",
+      measurementId: "G-S7RRR1CLFR"
+    };
+
+    // Initialize Firebase
+    if (!firebase.apps.length) {      
+      firebase.initializeApp(firebaseConfig);
+    }           
+
+    firebase.database().ref("hospedagem/"+this.state.hospedagemId).on("value", (snapshot) => {
+      console.log('buscando...');
+      let state = this.state;            
+      state.hospedagem = snapshot.val();      
+      this.setState(state);
+    })
+  }
 
   static navigationOptions = {
     title: 'Onde Ficar',
@@ -12,49 +46,54 @@ export default class Local extends Component {
   };
 
   render() {
+    const hospedagem = this.state.hospedagem
+    console.log('hospedagem: ', hospedagem)
     return (
       <View style={styles.container}>
 
       <ScrollView>    
         <View>
-        <Text style={styles.txtTitulo}>LOCAL 1 </Text>
+        <Text style={styles.txtTitulo}>{hospedagem.nome}</Text>
         <Text style={styles.bordered}></Text>
         </View>  
         
           <View class="" style={styles.titleImage}>
-          <Image source={img2}/>
+          <Image 
+            source={{uri: hospedagem.imageUrl}} 
+            style={{width: 440, height: 300}}
+          />
           </View>
 
           <View style={styles.blocoTxt}>
           <Text style={styles.txtId}>Email: </Text>
-          <Text style={styles.txtInfo}>xxx@email.com</Text>
+          <Text style={styles.txtInfo}>{hospedagem.email}</Text>
           </View>
 
           <View style={styles.blocoTxt}>
           <Text style={styles.txtId}>Telefone 1: </Text>
-          <Text style={styles.txtInfo}>(xx) xxxx-xxxx</Text>
-          </View>
-
-          <View style={styles.blocoTxt}>
-          <Text style={styles.txtId}>Telefone 2: </Text>
-          <Text style={styles.txtInfo}>(xx) xxxx-xxxx</Text>
+          <Text style={styles.txtInfo}>{hospedagem.telefone}</Text>
           </View>
 
           <View style={styles.blocoTxt}>
           <Text style={styles.txtId}>Endereço: </Text>
-          <Text style={styles.txtInfo}>Endereço do Local 1</Text>
+          <Text style={styles.txtInfo}>{hospedagem.endereco}</Text>
           </View>
 
           <Text style={styles.bordered}></Text>
 
           <View>
           <Text style={styles.txtTitulo}>Como chegar: </Text>
-          <Text style={styles.txtInfo}></Text>
+          <Text style={styles.txtInfo}>{hospedagem.instrucoes}</Text>
           </View>
 
           <View class="" style={styles.titleImage}>
-          <Image source={img3}/>
+          <Image 
+            source={{uri: hospedagem.mapaUrl}} 
+            style={{width: 440, height: 300}}
+          />
           </View>
+
+          <Button title="Nova hospedagem" onPress= {() => this.props.navigation.navigate('AdminHospedagem')}></Button>
 
       </ScrollView>    
       </View>

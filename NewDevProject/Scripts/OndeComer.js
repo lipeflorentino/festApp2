@@ -3,72 +3,111 @@ import {Platform, StyleSheet, Text, ScrollView, View, Image, TouchableOpacity, B
 import { createAppContainer} from 'react-navigation';
 import img from './BG/BG3.png'
 import img2 from './BG/Hotel1.jpg'
+import firebase from 'firebase'
 
 export default class OndeComer extends Component {
+
+  constructor(props){
+    super(props)
+
+    this.state = {
+      localAlimentacao: []
+    }
+
+    this.handleSubmit = this.handleSubmit.bind(this)
+
+    let firebaseConfig = {
+      apiKey: "AIzaSyDq95dRzVvYD6IUHNC_pb6dnFG7FfqGumI",
+      authDomain: "fmlanapp.firebaseapp.com",
+      databaseURL: "https://fmlanapp.firebaseio.com",
+      projectId: "fmlanapp",
+      storageBucket: "fmlanapp.appspot.com",
+      messagingSenderId: "1045348850059",
+      appId: "1:1045348850059:web:eba6952933fbc1cfb8378e",
+      measurementId: "G-S7RRR1CLFR"
+    };
+
+    // Initialize Firebase
+    if (!firebase.apps.length) {      
+      firebase.initializeApp(firebaseConfig);
+    }    
+    //let id = 1    
+
+    firebase.database().ref("alimentacao").on("value", (snapshot) => {
+      console.log('buscando...');
+      let state = this.state;  
+      state.localAlimentacao = [];          
+      snapshot.forEach((item) => {
+        state.localAlimentacao.push({
+          key: item.key,
+          nome: item.val().nome,
+          instrucoes: item.val().instrucoes,
+          mapaUrl: item.val().mapaUrl,
+          endereco: item.val().endereco,
+          email: item.val().email, 
+          telefone: item.val().telefone, 
+          imageUrl: item.val().imageUrl, 
+          descricao: item.val().descricao
+        })
+      })
+      this.setState(state);
+    })
+  }
 
   static navigationOptions = {
     title: 'Onde Comer'
   };
 
+  handleSubmit(id) {
+    this.props.navigation.navigate('LocalComer', {alimentacaoId: id})
+  }
+
   render() {
-    return (
-      <View style={styles.container}>
+    if(this.state.localAlimentacao != '' && this.state.localAlimentacao){
+      console.log('entrou!')     
+      return (
+        <View style={styles.container}>
 
-        <View class="" style={styles.bgImage}>
-        <Image source={img}/>
+          <View class="" style={styles.bgImage}>
+          <Image source={img}/>
+          </View>
+
+            <ScrollView>
+              <View style={styles.btnArea}>
+              {                  
+                  this.state.localAlimentacao.map((localAlimentacao, key) => {
+                    return ( 
+                      <TouchableOpacity key={key} onPress= {this.handleSubmit.bind(this, localAlimentacao.key)}>  
+                        <View class="" style={styles.infoImage}>
+                          <Image 
+                            source={{uri: localAlimentacao.imageUrl}} 
+                            style={{width: 440, height: 300}}
+                          />
+                        </View>
+                        <View>
+                        <Text style={styles.txtTitulo}>{localAlimentacao.nome}</Text>
+                        </View>
+                        <View>
+                        <Text style={styles.txtInfo}>{localAlimentacao.descricao}</Text>
+                        </View>
+                      </TouchableOpacity>
+                  );
+                })
+              }
+              </View>              
+            
+            </ScrollView>
+            
+            
         </View>
+      );
+    }else{
+      return(
+        <View>
 
-          <ScrollView>
-            <View style={styles.btnArea}>
-              <TouchableOpacity onPress= {() =>
-                                        this.props.navigation.navigate('LocalComer')}>  
-                <View class="" style={styles.infoImage}>
-                <Image source={img2}/>
-                </View>
-                <View>
-                <Text style={styles.txtTitulo}>Local 1</Text>
-                </View>
-                <View>
-                <Text style={styles.txtInfo}>Lorem ipsum dolor sit amet, consectetur.</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-
-            <View style={styles.btnArea}>
-              <TouchableOpacity onPress= {() =>
-                                        this.props.navigation.navigate('LocalComer')}>  
-                <View class="" style={styles.infoImage}>
-                <Image source={img2}/>
-                </View>
-                <View>
-                <Text style={styles.txtTitulo}>Local 2</Text>
-                </View>
-                <View>
-                <Text style={styles.txtInfo}>Lorem ipsum dolor sit amet, consectetur.</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-
-            <View style={styles.btnArea}>
-              <TouchableOpacity onPress= {() =>
-                                        this.props.navigation.navigate('LocalComer')}>  
-                <View class="" style={styles.infoImage}>
-                <Image source={img2}/>
-                </View>
-                <View>
-                <Text style={styles.txtTitulo}>Local 3</Text>
-                </View>
-                <View>
-                <Text style={styles.txtInfo}>Lorem ipsum dolor sit amet, consectetur.</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-          
-          </ScrollView>
-          
-          
-      </View>
-    );
+        </View>
+      );
+    }
   }
 }
 

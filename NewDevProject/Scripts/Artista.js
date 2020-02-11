@@ -1,27 +1,68 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Image, TouchableOpacity, Button} from 'react-native';
-import { createAppContainer} from 'react-navigation';
-import img2 from './BG/ArtistaJazz3.png'
+import firebase from 'firebase'
 
 export default class Artista extends Component {
+
+  constructor(props){
+    super(props)        
+    this.state = {
+      artista: [], 
+      artistaId: this.props.navigation.getParam('artistaId', null)        
+    }
+
+    //this.handleSubmit = this.handleSubmit.bind(this)
+
+    let firebaseConfig = {
+      apiKey: "AIzaSyDq95dRzVvYD6IUHNC_pb6dnFG7FfqGumI",
+      authDomain: "fmlanapp.firebaseapp.com",
+      databaseURL: "https://fmlanapp.firebaseio.com",
+      projectId: "fmlanapp",
+      storageBucket: "fmlanapp.appspot.com",
+      messagingSenderId: "1045348850059",
+      appId: "1:1045348850059:web:eba6952933fbc1cfb8378e",
+      measurementId: "G-S7RRR1CLFR"
+    };
+
+    // Initialize Firebase
+    if (!firebase.apps.length) {      
+      firebase.initializeApp(firebaseConfig);
+    }           
+
+    firebase.database().ref("artistas/"+this.state.artistaId).on("value", (snapshot) => {
+      console.log('buscando...');
+      let state = this.state;            
+      state.artista = snapshot.val();      
+      this.setState(state);
+    })
+  }
 
   static navigationOptions = {
     title: 'Artista'
   };
 
   render() {
+    const artista = this.state.artista
+    console.log('artista: ', artista)
     return (
       <View style={styles.container}>
 
           <View>
-          <Text style={styles.txtTitulo}>Artista1 Banda de Jazz </Text>
+            <Text style={styles.txtTitulo}>{artista.nome}</Text>
           </View>
+
           <View class="" style={styles.bgImage}>
-          <Image source={img2}/>
+            <Image 
+              source={{uri: artista.url}} 
+              style={{width: '100%', height: 200}}            
+            />
           </View>
+
           <View>
-          <Text style={styles.btnTexto}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
+            <Text style={styles.btnTexto}>{artista.descricao}</Text>
           </View>
+
+          <Button title="Novo artista" onPress= {() => this.props.navigation.navigate('AdminArtista')}></Button>
           
       </View>
     );
@@ -31,8 +72,8 @@ export default class Artista extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    //justifyContent: 'center',
+    //alignItems: 'center',
     backgroundColor: 'black',
   },
   bgImage:{
@@ -43,33 +84,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     //height: 100,
     //width: 100
- 
   },
   txtTitulo:{
-    color: "yellow",
+    color: "white",
     fontSize: 20,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    marginLeft: 5,
   },
-
-  btnArea:{
-    flexDirection: 'row',
-    marginTop: 50,
-    height: 0
-
-  },
-  btnArea2:{
-    flexDirection: 'row',
-    marginTop: 150,
-    height: 0
-
-  },
-  btnArea3:{
-    flexDirection: 'row',
-    marginTop: 150,
-    height: 0
-
-  },
-
   botao:{
     flex: 1,
     justifyContent: 'center',
@@ -77,24 +98,6 @@ const styles = StyleSheet.create({
     height: 100,
     margin: 17,
     borderRadius: 9
-  },
-  botaoColor1:{
-    backgroundColor: '#8A007E',
-  },
-  botaoColor2:{
-    backgroundColor: '#915D44',
-  },
-  botaoColor3:{
-    backgroundColor: '#BA007C',
-  },
-  botaoColor4:{
-    backgroundColor: '#A49171',
-  },
-  botaoColor5:{
-    backgroundColor: '#D68500',
-  },
-  botaoColor6:{
-    backgroundColor: '#B5733C',
   },
   btnTexto:{
     fontSize: 16,
@@ -104,5 +107,4 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,    
   }
- 
 });

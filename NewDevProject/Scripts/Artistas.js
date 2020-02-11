@@ -13,6 +13,8 @@ export default class Artistas extends Component {
       artista: []
     }
 
+    this.handleSubmit = this.handleSubmit.bind(this)
+
     let firebaseConfig = {
       apiKey: "AIzaSyDq95dRzVvYD6IUHNC_pb6dnFG7FfqGumI",
       authDomain: "fmlanapp.firebaseapp.com",
@@ -32,8 +34,16 @@ export default class Artistas extends Component {
 
     firebase.database().ref("artistas").on("value", (snapshot) => {
       console.log('buscando...');
-      let state = this.state;            
-      state.artista = snapshot.val();      
+      let state = this.state;  
+      state.artista = [];          
+      snapshot.forEach((item) => {
+        state.artista.push({
+          key: item.key,
+          nome: item.val().nome,
+          descricao: item.val().descricao,
+          url: item.val().url 
+        })
+      })
       this.setState(state);
     })
   }
@@ -42,51 +52,53 @@ export default class Artistas extends Component {
     
   };
 
-  render() {
-    let image
-    return (
-      <View style={styles.container}>
+  handleSubmit(id) {
+    this.props.navigation.navigate('Artista', {artistaId: id})
+  }
 
-       {/* <View class="" style={styles.bgImage}>
-          <Image source={img}/>
-        </View> */}
-
-        <View>
-        <ScrollView>  
-
-            <View style={styles.btnArea2}>              
-            
-              {
-                
-                
-                this.state.artista.map((artista, key) => {
-                                                   
-                  return (                  
-                  <TouchableOpacity key={artista.id} style={[styles.botao , styles.botaoColor1]} onPress= {() => this.props.navigation.navigate('Artista')}>
-                    <View class="" style={styles.bgImage}>
-                      <Image 
-                        source={{uri: artista.url}} 
-                        style={{width: 200, height: "100%"}}
-                      />
-                    </View>
+  render() {        
+    if(this.state.artista != '' && this.state.artista){
+      console.log('entrou!')      
+      return (
+        <View style={styles.container}>
   
-                    <View>
-                      <Text style={styles.btnTexto}>{artista.nome}</Text>
-                    </View>
-                  </TouchableOpacity> 
-                  );
-                })
-                
-              }
-           
-            
-            </View>
-        
-         </ScrollView>
-       </View>
-      
-      </View>
-    );
+         {/* <View class="" style={styles.bgImage}>
+            <Image source={img}/>
+          </View> */}
+  
+            <ScrollView>
+              <View style={styles.btnArea}>                              
+                {                  
+                  this.state.artista.map((artista, key) => {
+                                                     
+                    return (                  
+                    <TouchableOpacity key={key} onPress= {this.handleSubmit.bind(this, artista.key)}>
+                     <View class="" style={styles.infoImage}>
+                        <Image 
+                          source={{uri: artista.url}} 
+                          style={{width: 440, height: 300}}
+                        />
+                      </View>
+    
+                      <View>
+                        <Text style={styles.btnTexto}>{artista.nome}</Text>
+                      </View>
+                    </TouchableOpacity> 
+                    );
+                  })                  
+                }                           
+              </View>          
+            </ScrollView>
+          </View>                
+      );
+    }else{
+      return(
+        <View>
+
+        </View>
+      );
+    }
+    
   }
 }
 
@@ -95,76 +107,57 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'black'
+    backgroundColor: 'white',
   },
-  
-    bgImage:{
+  bgImage:{
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 0,
     position: 'absolute',
-    height: 150,
-    width: '50%'
-    
+    height: 100,
+    width: 100
+  },
+  infoImage:{
+    //flex: 1,
+    //justifyContent: 'center',
+    //alignItems: 'center',
+    //marginTop: 10,
+    //marginBottom: 10,
+    //height: 100,
+    //width: 100
+ 
+  },
+  txtTitulo:{
+    color: "black",
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginLeft: 10,
+    marginRight: 10  
   },
 
   btnArea:{
-    flexDirection: 'row',
-    //marginTop: 50,
-    //height: 0
-
+    backgroundColor: 'white',
+    marginRight: 10,
+    marginBottom : 10
   },
-  btnArea2:{
-    flexDirection: 'row',
-    //marginTop: 150,
-    //height: 0
-    height: 150,
-    width: 400,
-    margin: 5
-
-  },
-  btnArea3:{
-    //flexDirection: 'row',
-    //marginTop: 150,
-    //height: 0
-
-  },
-
   botao:{
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    height: 150,
-    width: 420,
-    //margin: 0,
-    //borderRadius: 2,
-    //opacity: 0.5
+    height: 100,
+    margin: 17,
+    borderRadius: 9
   },
-  botaoColor1:{
-    backgroundColor: 'black',
-  },
-  botaoColor2:{
-    backgroundColor: '#915D44',
-  },
-  botaoColor3:{
-    backgroundColor: '#BA007C',
-  },
-  botaoColor4:{
-    backgroundColor: '#A49171',
-  },
-  botaoColor5:{
-    backgroundColor: '#D68500',
-  },
-  botaoColor6:{
-    backgroundColor: '#B5733C',
-  },
-  btnTexto:{
-    fontSize: 15,
-    fontWeight: 'bold',
-    color: '#FFFFFF',
-    justifyContent: 'center',
-    //position: 'absolute',
-    paddingTop: 100
+  txtInfo:{
+    fontSize: 16,
+    color: 'black',
+    //justifyContent: 'center',
+    textAlign: 'justify',
+    //paddingLeft: 10,
+    //paddingRight: 10,   
+    marginLeft: 10,
+    marginRight: 10  
   }
  
 });

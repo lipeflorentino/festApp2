@@ -2,12 +2,15 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Image, TouchableOpacity, Button} from 'react-native';
 import { createAppContainer} from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import firebase from 'firebase'
 
 import Home from './Scripts/Home';
 import Programacao from './Scripts/Programacao'
 import Artistas from './Scripts/Artistas'
 import AdminArtista from './Scripts/Admin/AdminArtista'
+import AdminNoticia from './Scripts/Admin/AdminNoticia'
+import AdminHospedagem from './Scripts/Admin/AdminHospedagem'
+import AdminAlimentacao from './Scripts/Admin/AdminAlimentacao'
+import AdminProgramacao from './Scripts/Admin/AdminProgramacao'
 import OndeFicar from './Scripts/OndeFicar'
 import OndeComer from './Scripts/OndeComer'
 import Noticias from './Scripts/Noticias'
@@ -29,11 +32,24 @@ const Navegador = createStackNavigator ({
   Programacao: {
     screen: Programacao
   },
+  AdminProgramacao: {
+    screen: AdminProgramacao
+  },
   Artistas: {
     screen: Artistas
   },
+  AdminArtista: {
+    screen: AdminArtista
+  },
+  
   OndeFicar: {
     screen: OndeFicar
+  },
+  AdminHospedagem: {
+    screen: AdminHospedagem
+  },
+  AdminAlimentacao: {
+    screen: AdminAlimentacao
   },
   Local: {
     screen: Local
@@ -47,8 +63,11 @@ const Navegador = createStackNavigator ({
   Noticias: {
     screen: Noticias
   },
+  AdminNoticia: {
+    screen: AdminNoticia
+  },
   Artista: {
-    screen: AdminArtista
+    screen: Artista
   },
   Noticia: {
     screen: Noticia

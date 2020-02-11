@@ -6,18 +6,18 @@ import { TextInput } from 'react-native-gesture-handler';
 
 
 
-export default class AdminArtista extends Component {
+export default class AdminNoticia extends Component {
   constructor(props){
     super(props)
 
     this.state = {
+      data: '',
+      titulo: '', 
       descricao: '',
-      id: '', 
-      nome: '',
       url: ''
     }
 
-    this.cadastrarArtista = this.cadastrarArtista.bind(this);
+    this.cadastrarNoticia = this.cadastrarNoticia.bind(this);
 
     let firebaseConfig = {
       apiKey: "AIzaSyDq95dRzVvYD6IUHNC_pb6dnFG7FfqGumI",
@@ -37,19 +37,18 @@ export default class AdminArtista extends Component {
 
 }
 
-cadastrarArtista(e){
-    e.preventDefault();
+cadastrarNoticia(){
     console.log('entrou!')
-    if(this.state.nome != '' && this.state.descricao != '' && this.state.url != ''){
+    if(this.state.data != '' && this.state.titulo != '' && this.state.url != '' && this.state.descricao){
         console.log('preparando...')
-        let artistas = firebase.database().ref("artistas");
-        let chave = artistas.push().key;
+        let noticias = firebase.database().ref("noticias");
+        let chave = noticias.push().key;
         console.log('inserindo...')
-        artistas.child(chave).set({ 
-            nome: this.state.nome,
-            descricao: this.state.descricao,
-            url: this.state.url            
-
+        noticias.child(chave).set({ 
+            data: this.state.data,
+            titulo: this.state.titulo,
+            url: this.state.url,
+            descricao: this.state.descricao
         })
 
         alert('cadastrado com sucesso')
@@ -62,16 +61,19 @@ render() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.texto}>Nome</Text>
-            <TextInput underlineColorAndroid="transparent" style={styles.input} onChangeText={(nome) => {this.setState({nome})}}/>
+            <Text style={styles.texto}>Título</Text>
+            <TextInput underlineColorAndroid="transparent" style={styles.input} onChangeText={(titulo) => {this.setState({titulo})}}/>
 
-            <Text style={styles.texto}>Descrição</Text>
-            <TextInput underlineColorAndroid="transparent" style={styles.input} onChangeText={(descricao) => {this.setState({descricao})}}/>
+            <Text style={styles.texto}>Data</Text>
+            <TextInput underlineColorAndroid="transparent" style={styles.input} onChangeText={(data) => {this.setState({data})}}/>
             
             <Text style={styles.texto}>Url da imagem</Text>
             <TextInput underlineColorAndroid="transparent" style={styles.input} onChangeText={(url) => {this.setState({url})}}/>
 
-            <Button title="Novo artista" onPress={this.cadastrarArtista}></Button>
+            <Text style={styles.texto}>Descrição</Text>
+            <TextInput underlineColorAndroid="transparent" style={styles.input} onChangeText={(descricao) => {this.setState({descricao})}}/>
+
+            <Button title="Nova noticia" onPress={this.cadastrarNoticia}></Button>
         </View>
     );
 

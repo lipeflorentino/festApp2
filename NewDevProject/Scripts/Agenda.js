@@ -91,6 +91,8 @@ export default class Agenda extends Component {
           />
           </View>
 
+          <Button title="Nova programação" onPress= {() => this.props.navigation.navigate('AdminProgramacao')}></Button>
+
       </ScrollView>    
       </View>
     );
