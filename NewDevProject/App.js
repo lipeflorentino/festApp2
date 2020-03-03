@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Image, TouchableOpacity, Button} from 'react-native';
 import { createAppContainer} from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
@@ -20,6 +19,8 @@ import Noticia from './Scripts/Noticia'
 import Local from './Scripts/Local'
 import LocalComer from './Scripts/LocalComer'
 import Videos from './Scripts/Videos'
+import Login from './Scripts/Login'
+import Cadastro from './Scripts/Cadastro'
 
 
 const Navegador = createStackNavigator ({
@@ -74,7 +75,13 @@ const Navegador = createStackNavigator ({
   },
   Videos: {
     screen: Videos
-  }
+  },
+  Login: {
+    screen: Login
+  },
+  Cadastro: {
+    screen: Cadastro
+  },
 }); 
 
 const AppContainer = createAppContainer(Navegador);

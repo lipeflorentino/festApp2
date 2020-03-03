@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Image, TouchableOpacity, Button} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import {Drawer, Container, Header } from 'native-base';
 import imgBG  from './BG/BG3.png'
 import img1 from './BG/Botao1.png'
 import img2 from './BG/Botao2.png'
@@ -7,16 +9,38 @@ import img3 from './BG/Botao3.png'
 import img4 from './BG/Botao4.png'
 import img5 from './BG/Botao5.png'
 import img6 from './BG/Botao6.png'
+import SideBar from './Admin/SideBar'
 
 export default class Home extends Component {
 
-    static navigationOptions = {
-    header: null
+  static navigationOptions = {
+    header: null, 
+    title: 'Home'
   };
+
+  closeDrawer = () => {
+    this.drawer._root.close()
+  };
+  openDrawer = () => {
+    this.drawer._root.open()
+  };    
 
   render() {
     return (
       <View style={styles.container}>
+
+        {/* <Drawer
+          ref={(ref) => { this.drawer = ref; }}          
+          content={<SideBar navigator={this.navigator} />}
+          onClose={() => this.closeDrawer()}>
+          <Container>
+            <Header>
+                <Container style={{flexDirection: 'row'}}>
+                        <Icon onPress={() => this.openDrawer()} name="bars" size={30} color="#fff" />
+                </Container>
+            </Header>                             
+          </Container>
+        </Drawer> */}
 
         <View class="" style={styles.bgImage}>
           <Image source={imgBG}/>
@@ -58,12 +82,16 @@ export default class Home extends Component {
               <Image source={img5}/>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity style = {styles.botao} onPress= {() => this.props.navigation.navigate('Videos') }>
+            <TouchableOpacity style = {styles.botao} onPress= {() => this.props.navigation.navigate('Login') }>
               <View class="" style = {styles.iconeImage}>
               <Image source={img6}/>
               </View>
             </TouchableOpacity>
         </View>      
+
+        <View style={styles.btnArea3}>            
+            <Button title="Login" onPress= {() => this.props.navigation.navigate('Login') }></Button>            
+        </View>
 
       </View>
     );
